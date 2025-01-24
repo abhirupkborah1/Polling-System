@@ -1,0 +1,47 @@
+# docker-compose.yml
+version: "3.8"
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "polls:1:1,votes:1:1"
+    depends_on:
+      - zookeeper
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: pollsystem
+      POSTGRES_PASSWORD: pollsecret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - kafka
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://postgres:pollsecret@postgres:5432/pollsystem
+      - KAFKA_BROKER=kafka:9092
+      - KAFKA_TOPIC=votes
+      - KAFKA_PARTITION=3
+      - WS_PORT=3000
+
+volumes:
+  postgres-data:

@@ -1,0 +1,84 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+debug.log
+.log
+
+# Environment files
+.env
+.env.test
+.env.production
+.env.development.local
+.env.local
+.env.*.local
+
+# Runtime files
+pids
+*.pid
+*.seed
+*.pid.lock
+*.csv
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Editor and OS-specific files
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+*.vscode
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# Build artifacts
+dist/
+build/
+.out/
+coverage/
+*.map
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+.cache
+.nyc_output/
+
+# Logs and debugging
+trace
+*.out
+*.log.*
+
+# Docker
+docker-compose.override.yml
+docker-compose.override.*.yml
+
+# Testing
+jest/
+*.test.js
+*.spec.js
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+*.d.ts.map
+
+# Other files to ignore
+*.tgz
+*.lock
